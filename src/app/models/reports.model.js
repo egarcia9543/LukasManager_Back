@@ -1,16 +1,4 @@
-const { mongo } = require('mongoose');
 const mongoose = require('../database/config');
-
-const expenseSchema = new mongoose.Schema({
-    description: {
-        type: String,
-        required: [true, 'Please provide a description']
-    },
-    amount: {
-        type: Number,
-        required: [true, 'Please provide an amount']
-    }
-}, { _id: false });
 
 const reportSchema = new mongoose.Schema({
     user: {
@@ -22,14 +10,10 @@ const reportSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Report should have a month']
     },
-    mandatoryExpenses: {
-        type: [expenseSchema],
-        required: [true, 'Please provide the mandatory expenses']
-    },
-    discretionaryExpenses: {
-        type: [expenseSchema],
-        required: [true, 'Please provide the discretionary expenses']
-    },
+    expenses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'expenses'
+    }]
 });
 
 const report = mongoose.model('reports', reportSchema);
