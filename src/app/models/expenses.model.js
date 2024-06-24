@@ -19,10 +19,17 @@ const expenseSchema = new mongoose.Schema({
         type: Date,
         required: [true, 'Report should have a date']
     },
+    month: {
+        type: Number,
+        required: [true, 'Please provide a month']
+    },
+    year: {
+        type: Number,
+        required: [true, 'Please provide a year']
+    },
     category: {
         type: String,
         required: [true, 'Please provide a category'],
-        enum: ['Obligatory', 'Other', 'Savings']
     }
 });
 
